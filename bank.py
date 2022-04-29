@@ -86,33 +86,6 @@ def check_all() : #전체조회
     for i in member_list :
         print("계좌번호 : {0} / 이름 : {1} / 잔액 : {2}원".format(i.account_number, i.name, i.balance))
     print("====================")
-
-def delete() : #계좌삭제
-    print("======계좌삭제======")
-    while(True):
-        dlt_account = input("삭제하실 계좌번호를 입력해주세요 : ")
-        if not dlt_account.isnumeric() :
-            print("##계좌번호는 숫자를 입력해야 합니다##")
-        else:
-            break
-    for i in member_list :
-        if dlt_account == i.account_number :
-            print("계좌이름 : {}".format(i.name))
-            print("계좌잔고 : {}".format(i.balance))
-            while(True):
-                YesOrNo = input("정말 삭제하시겠습니까?(Y/N) ")
-                if YesOrNo == "Y" or "y" or "yes" or "Yes" :
-                    member_list.remove(i)
-                    print("##계좌삭제가 완료되었습니다##")
-                    break
-                elif YesOrNo == "N" or "n" or "no" or "No" :
-                    print("##앞으로도 잘 부탁드립니다##")
-                    break
-                else :
-                    print("##잘못된 입력입니다##")
-            print("====================")
-        else:
-            print("##입력하신 계좌번호는 없는 계좌번호입니다##")
         
 def end() : #프로그램 종료
     print("##프로그램을 종료합니다##")
@@ -128,7 +101,7 @@ while(True):
     print("2. 입금하기")
     print("3. 출금하기")
     print("4. 전체조회")
-    print("5. 계좌삭제")
+    print("5. (선택기능)")
     print("6. 프로그램 종료")
     print("====================")
     select_service = input("입력 :")
@@ -142,8 +115,8 @@ while(True):
         withdraw()
     elif select_service == "4":
         check_all()
-    elif select_service == "5":
-        delete()
+    # elif select_service == "5":
+    
     elif select_service == "6":
         end()
         break
