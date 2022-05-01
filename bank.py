@@ -84,11 +84,41 @@ def withdraw() : #출금
 def check_all() : #전체조회
     print("======전체조회======")
     for i in member_list :
-        print("계좌번호 : {0} / 이름 : {1} / 잔액 : {2}원".format(i.account_number, i.name, i.balance))
+        print("계좌번호 : {0} / 이름 : {1} / 잔액 : {2}원 / 대출 : {3}원".format(i.account_number, i.name, i.balance))
     print("====================")
         
 def end() : #프로그램 종료
     print("##프로그램을 종료합니다##")
+
+def loan(): #대출
+    print("======대출하기======")
+    while(True):
+        loan_account = input("대출하실 계좌번호를 입력해주세요 : ")
+        if not loan_account.isnumeric() :
+            print("##계좌번호는 숫자를 입력해야 합니다##")
+        else:
+            break
+
+    for i in member_list:
+        if loan_account == i.account_number:
+            print("계좌이름 : {}".format(i.name))
+            print("계좌잔고 : {}".format(i.balance))
+            while(True):
+                loan_money = input("대출하실 금액을 입력해주세요 : ")
+                if not i.loan.isnumeric():
+                    print("##대출 금액은 숫자를 입력해야 합니다##")
+                else:
+                    if int(loan_money) < 0:
+                        print("##잘못된 입력입니다##")
+                    else:
+                        break
+            i.balance += int(i.loan)
+            print("\n##계좌잔고 : {}원##".format(i.balance))
+            print("##대출이 완료되었습니다##")
+            print("##대출 금액은 {}원".format(loan_money))
+            print("====================")
+        else:
+            print("##입력하신 계좌번호는 없는 계좌번호입니다##")
 
 
 #메인 메소드
@@ -101,7 +131,7 @@ while(True):
     print("2. 입금하기")
     print("3. 출금하기")
     print("4. 전체조회")
-    print("5. (선택기능)")
+    print("5. 대출")
     print("6. 프로그램 종료")
     print("====================")
     select_service = input("입력 :")
@@ -115,8 +145,8 @@ while(True):
         withdraw()
     elif select_service == "4":
         check_all()
-    # elif select_service == "5":
-    
+    elif select_service == "5":
+        loan()
     elif select_service == "6":
         end()
         break
